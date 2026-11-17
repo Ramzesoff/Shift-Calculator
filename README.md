@@ -36,6 +36,6 @@
 
 ## Установка и запуск
 ```bash
-git clone https://github.com/username/shift-calculator.git
+git clone https://github.com/Ramzesoff/Shift-Calculator.git
 cd shift-calculator
 python main.py
