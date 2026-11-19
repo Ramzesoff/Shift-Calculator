@@ -1,4 +1,22 @@
+import json
+import os
+
 shifts = []
+FILE_NAME = "shifts.json"
+
+def load_shifts():
+    global shifts
+    if os.path.exists(FILE_NAME):
+        try:
+            with open(FILE_NAME, "r", encoding="utf-8") as f:
+                shifts = json.load(f)
+        except json.JSONDecodeError:
+            print("Ошибка чтение файла. Начинаем с пустого списка.")
+            shifts = []
+
+def save_shifts():
+    with open(FILE_NAME, "w", encoding="utf-8") as f:
+        json.dump(shifts, f, ensure_ascii=False, indent=4)
 
 def add_shift():
     date = input("Дата смены (ДД.ММ.ГГГГ): ")
@@ -9,7 +27,8 @@ def add_shift():
         print("Ошибка: часы и ставка должны быть числами.")
         return
     shifts.append({"date": date, "hours": hours, "rate": rate})
-    print("Смена добавлена.")
+    save_shifts() # Сохраняем в файл сразу после добавления
+    print("Смена добавлена и сохранена.")
 
 def show_shifts():
     if not shifts:
@@ -26,6 +45,7 @@ def show_summary():
     print(f"Итого: {total_salary():.2f} ₽")
 
 def main():
+    load_shifts() # Загружаем данные при старте
     while True:
         print("\n1. Добавить смену")
         print("2. Показать смены")
