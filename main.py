@@ -1,22 +1,7 @@
-import json
-import os
+import storage
+import logic
 
 shifts = []
-FILE_NAME = "shifts.json"
-
-def load_shifts():
-    global shifts
-    if os.path.exists(FILE_NAME):
-        try:
-            with open(FILE_NAME, "r", encoding="utf-8") as f:
-                shifts = json.load(f)
-        except json.JSONDecodeError:
-            print("Ошибка чтения файла. Начинаем с пустого списка.")
-            shifts = []
-
-def save_shifts():
-    with open(FILE_NAME, "w", encoding="utf-8") as f:
-        json.dump(shifts, f, ensure_ascii=False, indent=4)
 
 def add_shift():
     date = input("Дата смены (ДД.ММ.ГГГГ): ")
@@ -28,7 +13,7 @@ def add_shift():
         return
 
     shifts.append({"date": date, "hours": hours, "rate": rate})
-    save_shifts()
+    storage.save_shifts(shifts)
     print("Смена добавлена и сохранена.")
 
 def show_shifts():
@@ -44,22 +29,19 @@ def delete_shift():
         return
     show_shifts()
     try:
-        index = int(input("Введите номер смены для удаления (начиная с 1): "))
+        index = int(input("Введите номер смены для удаления: "))
         if 1 <= index <= len(shifts):
             deleted = shifts.pop(index - 1)
-            save_shifts()
+            storage.save_shifts(shifts)
             print(f"Смена {deleted['date']} удалена.")
         else:
             print("Ошибка: смены с таким номером нет.")
     except ValueError:
         print("Ошибка: нужно ввести число.")
 
-def total_salary():
-    return sum(s["hours"] * s["rate"] for s in shifts)
-
 def show_summary():
     print(f"Смен: {len(shifts)}")
-    print(f"Итого: {total_salary():.2f} ₽")
+    print(f"Итого: {logic.calculate_total(shifts):.2f} ₽")
 
 def show_monthly_stats():
     if not shifts:
@@ -73,20 +55,20 @@ def show_monthly_stats():
         return
 
     # Фильтруем смены: ищем точки с месяцем и годом, например ".11.2026"
-    search_str = f".{month:02d}.{year}"
-    month_shifts = [s for s in shifts if search_str in s["date"]]
+    month_shifts = logic.get_shifts_by_month(shifts, month, year)
 
     if not month_shifts:
         print(f"За {month:02d}.{year} смен нет.")
         return
 
-    total = sum(s["hours"] * s["rate"] for s in month_shifts)
+    total = logic.calculate_total(month_shifts)
     print(f"--- Статистика за {month:02d}.{year} ---")
     print(f"Смен: {len(month_shifts)}")
     print(f"Итого: {total:.2f} ₽")
 
 def main():
-    load_shifts()
+    global shifts
+    shifts = storage.load_shifts()
     while True:
         print("\n1. Добавить смену")
         print("2. Показать смены")
@@ -108,7 +90,7 @@ def main():
             print(f"Всего смен: {len(shifts)}")
         elif choice == "5":
             if shifts:
-                print(f"Средняя: {total_salary() / len(shifts):.2f} ₽")
+                print(f"Средняя: {logic.calculate_average(shifts):.2f} ₽")
             else:
                 print("Смен пока нет.")
         elif choice == "6":
