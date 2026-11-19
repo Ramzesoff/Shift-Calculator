@@ -67,3 +67,14 @@ Shift-Calculator/
     ├── v2_json_file.png
     ├── v3_delete_shift.png
     └── v3_monthly_stats.png
+```
+
+## Стек
+- Python 3.15+
+- Стандартная библиотека
+
+## Установка и запуск
+```bash
+git clone https://github.com/Ramzesoff/Shift-Calculator.git
+cd Shift-Calculator
+python main.py
