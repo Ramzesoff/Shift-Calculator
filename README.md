@@ -14,16 +14,6 @@
 - Средняя зарплата за смену
 - Обработка ошибок ввода (буквы вместо чисел не ломают программу)
 
-## Стек
-- Python 3.15+
-- Стандартная библиотека
-
-## Установка и запуск
-```bash
-git clone https://github.com/username/shift-calculator.git
-cd shift-calculator
-python main.py
-
 ## Скриншоты
 
 ### Версия 1.0 (без JSON)
@@ -39,3 +29,27 @@ python main.py
 
 **Обработка ошибок ввода (защита от падения программы):**
 ![Обработка ошибок](screenshots/v1_error_handling.png)
+
+## Структура проекта
+```text
+Shift-Calculator/
+├── main.py          # весь код: меню, функции, расчёты
+├── README.md        # описание проекта
+├── CHANGELOG.md     # история версий
+├── .gitignore       # исключения для Git
+└── screenshots/     # скриншоты работы
+    ├── v1_menu.png
+    ├── v1_add_shift.png
+    ├── v1_show_shifts.png
+    └── v1_error_handling.png
+```
+
+## Стек
+- Python 3.15+
+- Стандартная библиотека
+
+## Установка и запуск
+```bash
+git clone https://github.com/Ramzesoff/Shift-Calculator.git
+cd shift-calculator
+python main.py
