@@ -55,6 +55,7 @@
 ```text
 Shift-Calculator/
 ├── main.py          # Меню и связка модулей
+├── gui.py           # Графическая версия (v5)
 ├── storage.py       # Работа с JSON файлом
 ├── logic.py         # Расчеты и логика
 ├── README.md        # Описание проекта
@@ -73,6 +74,10 @@ git clone https://github.com/Ramzesoff/Shift-Calculator.git
 cd Shift-Calculator
 python main.py
 ```
+# Для запуска графической версии:
+```bash
+python gui.py
+```
 
 ## Чему я научился
 - Работа с функциями и возвратом значений (`return`)
@@ -82,3 +87,4 @@ python main.py
 - Работа с файловой системой через модуль `os`
 - Рефакторинг: разделение кода на модули (`storage.py`, `logic.py`) и работа с импортами
 - Работа с Git и GitHub (коммиты, загрузка файлов)
+- Создание графического интерфейса (GUI) с помощью библиотеки tkinter
