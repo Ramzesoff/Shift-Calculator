@@ -63,5 +63,5 @@ Shift-Calculator/
 ## Установка и запуск
 ```bash
 git clone https://github.com/Ramzesoff/Shift-Calculator.git
-cd shift-calculator
+cd Shift-Calculator
 python main.py
