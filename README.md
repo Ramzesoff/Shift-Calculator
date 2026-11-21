@@ -63,7 +63,7 @@
 ## Структура проекта
 ```text
 Shift-Calculator/
-├── main.py          # # Консольная версия (v1-v4)
+├── main.py          # Консольная версия (v1-v4)
 ├── gui.py           # Графическая версия (v5)
 ├── storage.py       # Работа с JSON файлом
 ├── logic.py         # Расчеты и логика
@@ -81,12 +81,12 @@ Shift-Calculator/
 ```bash
 git clone https://github.com/Ramzesoff/Shift-Calculator.git
 cd Shift-Calculator
+```
+# Для запуска консольной версии:
 python main.py
-```
+
 # Для запуска графической версии:
-```bash
 python gui.py
-```
 
 ## Чему я научился
 - Работа с функциями и возвратом значений (`return`)
